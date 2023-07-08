@@ -79,7 +79,7 @@ impl fmt::Display for Control {
         for e in &self.seq {
             write!(f, "{}", e)?;
         }
-        write!(f, "\x5C")?;
+        write!(f, "\x1b\\")?;
         Ok(())
     }
 }
