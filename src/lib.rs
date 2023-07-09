@@ -49,6 +49,7 @@ impl fmt::Display for Char {
 #[derive(Debug, Clone, PartialEq, Eq)]
 pub enum Element {
     Repeat { n: usize, c: Char },
+    NewLine,
 }
 
 impl fmt::Display for Element {
@@ -56,6 +57,9 @@ impl fmt::Display for Element {
         match self {
             Self::Repeat { n, c } => {
                 write!(f, "!{}{}", n, c)?;
+            }
+            Self::NewLine => {
+                write!(f, "-")?;
             }
         }
         Ok(())
@@ -70,6 +74,10 @@ pub struct Control {
 impl Control {
     pub fn add_repeat(&mut self, n: usize, c: Char) {
         self.seq.push(Element::Repeat { n, c })
+    }
+
+    pub fn add_newline(&mut self) {
+        self.seq.push(Element::NewLine)
     }
 }
 
